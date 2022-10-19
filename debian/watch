@@ -1,0 +1,8 @@
+# debian/watch for t1utils
+
+# mandatory version
+version=3
+
+# t1utils live on Eddie Kohler's website:
+https://www.lcdf.org/type/ \
+  t1utils-([\d\.]*).tar.gz

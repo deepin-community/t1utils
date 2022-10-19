@@ -1,0 +1,10 @@
+extend-diff-ignore=(?:.*/)?Makefile\.in
+extend-diff-ignore=aclocal\.m4
+extend-diff-ignore=autom4te\.cache
+extend-diff-ignore=depcomp
+extend-diff-ignore=compile
+extend-diff-ignore=config\.h\.in
+extend-diff-ignore=configure
+extend-diff-ignore=install-sh
+extend-diff-ignore=missing
+

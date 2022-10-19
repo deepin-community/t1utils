@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+# -Wno-unused-result => hide warnings that upstream ignores, so we can spot other warnings easier.
+export DEB_CFLAGS_MAINT_APPEND=-Werror=implicit-function-declaration -Wall -Wno-unused-result
+export DEB_LDFLAGS_MAINT_APPEND=-Wl,--no-add-needed,--as-needed,--no-undefined
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+export DEB_CPPFLAGS_MAINT_APPEND=-D_GNU_SOURCE
+
+%:
+	dh $@
+
+override_dh_installchangelogs:
+	dh_installchangelogs NEWS.md

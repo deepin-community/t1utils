@@ -1,0 +1,385 @@
+t1utils (1.41-4) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Update standards version to 4.4.1, no changes needed.
+
+  [ Niels Thykier ]
+  * Bump debhelper compat level to 13.
+  * Bump Standards-Version to 4.5.0 - no changes required.
+
+ -- Niels Thykier <niels@thykier.net>  Wed, 15 Apr 2020 14:42:35 +0000
+
+t1utils (1.41-3) unstable; urgency=medium
+
+  * Bump debhelper-compat to 12.
+  * Bump Standards-Versions to 4.3.0 - no changes required.
+  * Migrate git repo for debian packaging to salsa.d.o.
+
+ -- Niels Thykier <niels@thykier.net>  Tue, 25 Dec 2018 09:17:32 +0000
+
+t1utils (1.41-2) unstable; urgency=medium
+
+  * Mark t1utils as "Multi-Arch: foreign".
+
+ -- Niels Thykier <niels@thykier.net>  Wed, 15 Nov 2017 18:33:24 +0000
+
+t1utils (1.41-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Remove patch for an off-by-one issue that is now fixed upstream.
+  * Set R³ to no; t1utils does not need (fake)root during package
+    build.
+  * Have git and dpkg-source ignore some auto-generated files that
+    are regenerated during build.
+  * Enable the dwz sequence to reduce size of debug files.
+  * Add versioned build-dependency on debhelper to ensure that
+    the dwz tooling is available.  Also add a build-dependency
+    on dwz as debhelper does not provide dwz for dh_dwz at the
+    moment (dh_dwz is experimental).
+  * Drop now unnecessary versioned Build-Depends on dpkg-dev.
+  * Update the Homepage field and the watch file to use https.
+  * Add Vcs-* fields.
+  * Bump Standards-Version to 4.1.1 - no additional changes required.
+  * Tweak compiler warning flags, so we can easily spot new warnings.
+
+ -- Niels Thykier <niels@thykier.net>  Sun, 29 Oct 2017 18:44:34 +0000
+
+t1utils (1.40-2) unstable; urgency=medium
+
+  * Define _GNU_SOURCE to ensure we get memmem() defined.
+    Otherwise, t1utils is miscompiled and ends up being broken.
+    Thanks to Steve Langasek for the report and the analysis.
+    (Closes: #869756)
+  * Add temporary patch to gracefully terminate on known off-by-one
+    error condition (rather than do a buffer overflow).  Bug is
+    reported upstream (https://github.com/kohler/t1utils/issues/9)
+    and we hope to have a better fix in a later release.
+    (Closes:  #869797)
+  * Make the build fail hard on implicitly defined C functions to
+    avoid repeating #869756 in the future.
+
+ -- Niels Thykier <niels@thykier.net>  Wed, 26 Jul 2017 21:07:06 +0000
+
+t1utils (1.40-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Fixes a read-only buffer-overflow.  Thanks to Jakub Wilk
+      for reporting it.  (Closes: #868134)
+  * Remove Build-Depends on autoreconf and remove autoreconf
+    related code from debian/rules.  This is implied by debhelper
+    compat 10.
+  * Correct the names of the upstream README and NEWS file, so
+    they are installed.
+  * Bump Standards-Versions to 4.0.0 - no changes required.
+  * Bump versioned Build-Dependency on debhelper to require a
+    minimum version of 10.
+
+ -- Niels Thykier <niels@thykier.net>  Mon, 24 Jul 2017 20:08:36 +0000
+
+t1utils (1.39-2) unstable; urgency=medium
+
+  * Upload to unstable.
+  * Bump debhelper compat to 10.
+  * Migrate to dh-style rules and enable all hardening.
+  * Bump Standards-Version to 3.9.6 - no changes required.
+  * Install the NEWS file as the upstream changelog.
+
+ -- Niels Thykier <niels@thykier.net>  Sat, 02 Jan 2016 14:22:12 +0000
+
+t1utils (1.39-1) experimental; urgency=medium
+
+  * New upstream release.
+    - Fix infinite loop in t1disasm on some fonts.
+    - Fix leak of va_list by adding necessary va_end calls.
+    - Fix buffer-overflow that can reliably overwrite a
+      FILE* pointer.  (Closes: #779274)
+  * Drop patch for the infinite loop in t1disasm, since it is
+    included in the upstream release.
+
+ -- Niels Thykier <niels@thykier.net>  Sat, 28 Feb 2015 08:53:38 +0100
+
+t1utils (1.38-3) unstable; urgency=medium
+
+  * Replace the Debian patch for #772774 with upstreams
+    own version for the same issue.
+
+ -- Niels Thykier <niels@thykier.net>  Thu, 11 Dec 2014 18:43:27 +0100
+
+t1utils (1.38-2) unstable; urgency=medium
+
+  * Apply patch to avoid infinite loop on some fonts files
+    in t1disasm.  Thanks to Jakub Wilk for reporting and the
+    "American fuzzy lop" tool for creating the crafted font
+    file.  (Closes: #772774)
+
+ -- Niels Thykier <niels@thykier.net>  Thu, 11 Dec 2014 17:58:11 +0100
+
+t1utils (1.38-1) unstable; urgency=medium
+
+  * New upstream release.
+    - Fixes call-stack overflow/segmentation fault.
+      (Closes: #724571)
+  * Take over maintenance of the package.
+    - New maintainer email.  (Closes: #744736)
+  * Updated debian/copyright.
+
+ -- Niels Thykier <niels@thykier.net>  Tue, 14 Oct 2014 20:10:04 +0200
+
+t1utils (1.37-2.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+
+  [ Mattia Rizzolo ]
+  * Use dh_autoreconf to update config.{sub,guess} and libtool.m4/aclocal.m4
+    (Closes: #727274).
+
+ -- Aurelien Jarno <aurel32@debian.org>  Sun, 24 Aug 2014 06:22:10 +0200
+
+t1utils (1.37-2) unstable; urgency=low
+
+  * Bug fix: "Please remove history discussion from the package
+    description", thanks to Adrian Bunk (Closes: #642200).
+  * Update Debian Standards-Version to 3.9.3.0 (no code changes).
+  * Adds build-arch and build-indep targets to debian/rules.
+  * Add hardening directives.
+
+ -- C.M. Connelly <cmc@debian.org>  Sat, 30 Jun 2012 12:50:32 -0700
+
+t1utils (1.37-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixes a bug with handling large characters.
+  * Update Debian Standards-Version 3.9.1.0 (no code changes).
+
+ -- C.M. Connelly <cmc@debian.org>  Wed, 07 Sep 2011 12:01:09 -0700
+
+t1utils (1.36-1) unstable; urgency=low
+
+  * New upstream release.
+  * Minor code cleanups; support for --enable-multiplatform switch.
+  * Update Debian Standards-Version to 3.8.4 (no code changes).
+  * Add debian/sources/format (3.0 (quilt)).
+  * debian/control: Update Depends for debhelper.
+
+ -- C.M. Connelly <cmc@debian.org>  Wed, 02 Jun 2010 11:40:25 -0700
+
+t1utils (1.35-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fixes FTBS problem discovered in Ubuntu. (Closes: #551523)
+
+ -- C.M. Connelly <cmc@debian.org>  Thu, 29 Oct 2009 20:44:07 -0700
+
+t1utils (1.34-2) unstable; urgency=low
+
+  * Add versioned dependency on debhelper to satisfy lintian.
+  * Add debian/watch file.
+  * Update Standards-Version to 3.8.3.  No code changes.
+
+ -- C.M. Connelly <cmc@debian.org>  Tue, 25 Aug 2009 00:45:59 -0700
+
+t1utils (1.34-1) unstable; urgency=low
+
+  * New upstream release.
+  * Update Standards-Version to 3.8.1.  No code changes.
+
+ -- C.M. Connelly <cmc@debian.org>  Mon, 13 Apr 2009 12:11:39 -0700
+
+t1utils (1.33-2) unstable; urgency=low
+
+  * Update Standards-Version to 3.8.0.  No code changes.
+
+ -- C.M. Connelly <cmc@debian.org>  Thu, 19 Feb 2009 12:10:29 -0800
+
+t1utils (1.33-1) unstable; urgency=low
+
+  * New upstream release.  Fixes signedness comparison warnings during
+    compilation.
+
+ -- C.M. Connelly <cmc@debian.org>  Thu, 10 Jan 2008 12:43:10 -0800
+
+t1utils (1.32-2) unstable; urgency=low
+
+  * Update Standards-Version in debian/control (no code changes required).
+  * Add Homepage field in debian/control
+  * Update Description field in debian/control
+  * Clean up/modernize debian/rules.
+  * Fix cleaning rules in debian/rules.
+  * Fix installation clause so we actually install component programs.
+  * Add debian/compat file to support current version of debhelper.
+  * Drop unneeded debian/dirs file.
+
+ -- C.M. Connelly <cmc@debian.org>  Mon, 07 Jan 2008 15:04:30 -0800
+
+t1utils (1.32-1) unstable; urgency=medium
+
+  * New upstream release
+  * Fixes memory corruption bug
+
+ -- C.M. Connelly <cmc@debian.org>  Tue,  2 Mar 2004 09:25:34 -0800
+
+t1utils (1.31-1) unstable; urgency=low
+
+  * New upstream release
+  * Support fonts where the first eexec-encrypted byte is binary 0
+
+ -- C.M. Connelly <cmc@debian.org>  Thu, 19 Feb 2004 21:01:09 -0800
+
+t1utils (1.30-1) unstable; urgency=low
+
+  * New upstream release
+  * Support fonts where "currentfile eexec" isn't followed by a newline
+
+ -- C.M. Connelly <cmc@debian.org>  Sun, 25 Jan 2004 22:48:46 -0800
+
+t1utils (1.29-1) unstable; urgency=low
+
+  * New upstream release
+  * t1disasm: handles Omega font
+
+ -- C.M. Connelly <cmc@debian.org>  Mon, 13 Oct 2003 18:41:03 -0700
+
+t1utils (1.28-1) unstable; urgency=low
+
+  * New upstream release
+  * Fix some built problems experienced by some users
+  * Upgraded Standards-Version to 3.6.1.0
+
+ -- C.M. Connelly <cmc@debian.org>  Tue,  2 Sep 2003 23:34:20 -0700
+
+t1utils (1.27-1) unstable; urgency=low
+
+  * New upstream release
+  * Updated Standards-Version to 3.5.9.0
+
+ -- C.M. Connelly <cmc@debian.org>  Mon, 31 Mar 2003 17:14:49 -0800
+
+t1utils (1.26-2) unstable; urgency=low
+
+  * Updated Standards-Version to 3.5.8.0
+  * debian/control: Removed period at end of Description line
+
+ -- C.M. Connelly <cmc@debian.org>  Thu, 30 Jan 2003 14:14:54 -0800
+
+t1utils (1.26-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- C.M. Connelly <cmc@debian.org>  Tue, 23 Apr 2002 20:18:13 -0700
+
+t1utils (1.25-1) unstable; urgency=medium
+
+  * New upstream release
+  * Fixes a buglet in t1asm reported by Luc Deroye; see
+    /usr/share/doc/t1utils/changelog.gz for more details
+
+ -- C.M. Connelly <cmc@debian.org>  Tue,  8 Jan 2002 09:28:41 -0800
+
+t1utils (1.24-1) unstable; urgency=low
+
+  * New upstream release
+  * More changes to fix compilation bugs on various platforms
+
+ -- C.M. Connelly <cmc@debian.org>  Mon, 10 Sep 2001 13:25:23 -0700
+
+t1utils (1.23-3) unstable; urgency=low
+
+  * debian/copyright: Changed upstream author line to make new version of
+    lintian (1.20.14) happy
+
+ -- C.M. Connelly <cmc@debian.org>  Fri, 31 Aug 2001 16:39:47 -0700
+
+t1utils (1.23-2) unstable; urgency=low
+
+  * debian/rules: Use dh_installchangelogs to install upstream changelog
+  * debian/control: Update Standards-Version to 3.5.6.0
+
+ -- C.M. Connelly <cmc@debian.org>  Mon, 20 Aug 2001 10:18:09 -0700
+
+t1utils (1.23-1) unstable; urgency=low
+
+  * New upstream release -- fixes problem with MacBinary CRC
+  * Updated to Standards-Version 3.5.5.0
+  * Added code to debian/rules to install NEWS file as changelog.gz
+  * Add Build-Depends for debhelper
+  * Re-enable warnings
+
+ -- C.M. Connelly <cmc@debian.org>  Mon, 18 Jun 2001 18:35:59 -0700
+
+t1utils (1.22-1) unstable; urgency=high
+
+  * New upstream release
+  * Fixes a serious bug in handling PFA fonts with DOS line
+    endings. This bug can cause font corruption, and has been present
+    since Version 1.13. Reported by Han The Thanh <thanh@informatics.muni.cz>
+  * Updated Standards-Version
+  * Dropped INSTALL file from docs
+
+ -- C.M. Connelly <cmc@debian.org>  Tue,  6 Mar 2001 16:08:08 -0800
+
+t1utils (1.21-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixes some small, noncritical bugs in t1ascii, t1asm, and t1unmac.
+    See the NEWS file (in /usr/share/doc/t1utils) for more information.
+  * Updated README.Debian
+  * Removed TODO from debian/docs
+
+ -- C.M. Connelly <cmc@debian.org>  Mon, 12 Feb 2001 14:16:21 -0800
+
+t1utils (1.20-1) unstable; urgency=low
+
+  * New maintainer: C.M. Connelly <cmc@debian.org>
+  * Closes: #61803
+
+ -- C.M. Connelly <cmc@debian.org>  Sat,  4 Nov 2000 15:59:44 -0800
+
+t1utils (1.20-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- C.M. Connelly <c@eskimo.com>  Fri, 23 Jun 2000 14:42:07 -0700
+
+t1utils (1.18-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- C.M. Connelly <c@eskimo.com>  Tue,  2 May 2000 15:05:11 -0700
+
+t1utils (1.17-1) unstable; urgency=low
+
+  * Package created from scratch based on Eddie Kohler's source
+  * Local package to replace old package in archive
+
+ -- C.M. Connelly <c@eskimo.com>  Fri, 28 Apr 2000 14:18:55 -0700
+
+t1utils (1.2-3) unstable; urgency=low
+
+  * Upgraded to policy 3.0.1, in particular documentation moved to
+    /usr/share (with the for potato required /usr/doc/t1utils ->
+    /usr/share/doc/t1utils symbolic link management).
+
+  * t1asm.c: Fixed int/size_t conflicts and a format error.
+
+ -- Kristoffer H. Rose <krisrose@debian.org>  Thu,  7 Oct 1999 14:17:50 +0200
+
+t1utils (1.2-2) unstable; urgency=low
+
+  * Patch for glibc 2.1 donated by Hartmut Koptein <koptein@et-inf.fho-emden.de>
+    incorporated.
+  * Manual pages made mode 644 as required by policy.
+
+ -- Kristoffer H. Rose <krisrose@debian.org>  Mon, 18 Jan 1999 13:53:51 +0100
+
+t1utils (1.2) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Kristoffer H. Rose <krisrose@debian.org>  Mon, 16 Nov 1998 17:32:19 +0100
+
+t1utils (1.1a-1) unstable; urgency=low
+
+  * Initial Release.
+  * Note: the upstream Makefile uses HOME instead of DESTDIR.
+
+ -- Kristoffer H. Rose <krisrose@debian.org>  Thu, 12 Nov 1998 13:21:40 +0100
